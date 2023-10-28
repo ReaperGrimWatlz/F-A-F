@@ -1,0 +1,14 @@
+import cv2
+import numpy as np
+image = cv2.imread('CV.jpg')
+def get_coordinates(event, x, y, flags, param):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        print("Left button of the mouse is clicked at position: ", (x, y))
+
+cv2.namedWindow('image')
+cv2.setMouseCallback('image', get_coordinates)
+while True:
+    cv2.imshow('image', image)
+    if cv2.waitKey(20) & 0xFF == ord('q'):
+        break
+cv2.destroyAllWindows()
