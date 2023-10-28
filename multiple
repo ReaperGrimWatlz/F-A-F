@@ -1,0 +1,48 @@
+import cv2
+import numpy as np
+import dlib
+
+# Initialize dlib's face detector and landmark predictor
+detector = dlib.get_frontal_face_detector()
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+
+# Initialize OpenPose's pose estimator
+pose_estimator = dlib.pose_predictor("shape_predictor_68_pose_estimation.dat")
+
+# Load image
+img = cv2.imread("cv.jpg")
+
+# Convert image to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Detect faces in the image
+faces = detector(gray)
+
+# Loop through each detected face
+for face in faces:
+    # Get the coordinates of the face and create a rectangle around it
+    x, y, w, h = face.left(), face.top(), face.width(), face.height()
+    cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+
+    # Detect facial landmarks in the face region
+    landmarks = predictor(gray, face)
+
+    # Loop through each facial landmark and draw a circle around it
+    for n in range(0, landmarks.num_parts):
+        x = landmarks.part(n).x
+        y = landmarks.part(n).y
+        cv2.circle(img, (x, y), 3, (0, 255, 0), -1)
+
+    # Estimate pose using OpenPose
+    pose = pose_estimator(gray, face)
+
+    # Loop through each pose part and draw a rectangle around it
+    for n in range(0, pose.num_parts()):
+        x = pose.part(n).x
+        y = pose.part(n).y
+        cv2.rectangle(img, (x, y), (x+1, y+1), (0, 0, 255), -1)
+
+# Display the resulting image
+cv2.imshow("Face, Landmarks, and Pose Detection", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
