@@ -1,13 +1,14 @@
 import cv2
+import numpy as np
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 true=True
 def main():
 
     while True:
-        print('a=Show Video','b=Gray','c=Pencil Sketch','d=Blur','e=Laplacian', 'f=Cancel',sep='\n')
+        print('a=Show Video','b=Gray','c=Pencil Sketch','d=Blur','e=Laplacian', 'f=Color filter','g=cancel',sep='\n')
         choice=input('Option: ')
         if choice =='a':
-            print('1,Show Video' , '2,Rotated' , '3,Crop'   , '4,Rotated and crop ', '5, Face Detect', sep='\n')
+            print('1,Show Video' , '2,Rotated' , '3,Crop'   , '4,Rotated and crop ', '5,Face Detect', sep='\n')
             choice2=input('Option: ')
             if choice2=='1':
                 vid=cv2.VideoCapture(0)
@@ -359,6 +360,25 @@ def main():
                 vid.release()
                 cv2.destroyAllWindows()
         elif choice=='f':
+            vid=cv2.VideoCapture(0)
+            b=input('Enter lower blue value (0-255) ')
+            B=input('Enter Upper Blue Value (0-255) ')
+            g=input('Enter lower green value (0-255) ')
+            G=input('Enter Upper Green Value (0-255) ')
+            r=input('Enter lower red value (0-255) ')
+            R=input('Enter Upper Red Vaulue (0-255) ')
+            while True:
+                ret, image=vid.read()
+                lower= np.array([b,g,r], dtype = "uint8")
+                upper= np.array([B,G,R], dtype = "uint8")
+                mask = cv2.inRange(image, lower, upper)
+                detected_output = cv2.bitwise_and(image, image, mask = mask)
+                cv2.imshow("Color", detected_output)
+                if cv2.waitKey(1)& 0xFF == ord('q'):
+                    break
+            vid.release()
+            cv2.destroyAllWindows()
+        elif choice=='g':
             continue
         else:
             print('Wrong input, Try again')
