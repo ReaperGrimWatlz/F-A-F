@@ -1,0 +1,50 @@
+import matplotlib.pyplot as plt
+marks=[10,90,20,80,70,30,40,60]
+sub=['a','b','c','d','e','f','g','h']
+clr=input('Enter Color like red blue greed etc ')
+a=True
+def line():
+    plt.plot(sub,marks,color=clr)
+def bar():
+    plt.bar(sub,marks,color=clr)
+def scatter():
+    plt.scatter(sub,marks,color=clr)
+def main():
+    while a==True:
+        print('Options:','1=Line Chart','2=Bar Graph','3=Scatter Chart','4=Cancel',sep='\n')
+        opt=int(input('Enter Numeric value'))
+        match opt:
+            case 1:
+                print('You chose Line chart')
+                line()
+                plt.show()
+            case 2:
+                print('You chose Bar graph')
+                bar()
+                plt.show()
+            case 3:
+                print('You chose Scatter plot chart')
+                scatter()
+                plt.show()
+            case 4:
+                a=False
+            case _:
+                print('Invalid Value')
+    op=input('Wish to retry?Y/N')
+    match op:
+        case 'Y':
+            a=True
+        case 'y':
+            a=True
+        case _:
+            print('Ok')
+if __name__ == "__main__":
+    print('Wish to continue?Y/N ')
+    ot=input('')
+    match ot:
+        case 'Y':
+            main()
+        case 'y':
+            main()
+        case _:
+            print('Ok.')
