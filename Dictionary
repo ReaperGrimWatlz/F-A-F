@@ -1,0 +1,41 @@
+sizekey=int(input('Enter number of keys'))
+keytypes=['string','integer']
+d={}
+def main():
+    while True:
+        choice=input('Wish to Start?')
+        if choice=='Y' or choice=='y':
+            print('Supported types:',keytypes,'for string the value is integer and vice versa',sep='\n')
+            types=input('Enter Key type ')
+            match types:
+                case 'string':
+                    for i in range(0,sizekey):
+                        key=input('Enter Key')
+                        value=int(input('Enter Value'))
+                        d[key]=value
+                    print('Dictionary you created',d)
+                case 'String':
+                    for i in range(0,sizekey):
+                        key=input('Enter Key')
+                        value=int(input('Enter Value'))
+                        d[key]=value
+                    print('Dictionary you created',d)
+                case 'integer':
+                    for i in range(0,sizekey):
+                        key=int(input('Enter Int Key'))
+                        value=input('Enter value')
+                        d[key]=value
+                    print('Dictionary you created',d)
+                case 'Integer':
+                    for i in range(0,sizekey):
+                        key=int(input('Enter Int Key'))
+                        value=input('Enter value')
+                        d[key]=value
+                    print('Dictionary you created',d)
+                case _:
+                    print('Invalid argument')
+        else:
+            print("Ok")
+        return 0
+if __name__=="__main__":
+    main()
