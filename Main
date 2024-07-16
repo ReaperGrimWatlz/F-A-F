@@ -14,6 +14,7 @@ def login():
                     y=True
                 if x==True and y==True:
                     print('Successfully loaded points (you have %d points)'%z[i]['Points'])
+                    z[i]['Hints']=3
                     break
             if x==True and y==True:
                 break
