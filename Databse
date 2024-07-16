@@ -1,0 +1,4 @@
+import pickle as pkle
+f=open('Data_base.dat','wb')
+d={'Points':500,'User':'Chottu','Password':'Dodeja'}
+f.close()
