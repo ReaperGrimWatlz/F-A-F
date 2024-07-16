@@ -5,20 +5,18 @@ def login():
     User=input('Enter Your user')
     Password=input('Enter Your Passwer')
     with open('Data_Base.dat','rb') as f:
-        d=pik.load(f)
-        for i,m in d:
-            for j,g,h in i:
-                if j==User or g==User or h==User:
+        z=pik.load(f)
+        for i in z:
+            for j in z[i]:
+                if z[i][j]==User:
                     x=True
-                if j==Password or g==Password or h==Password:
+                if z[i][j]==Password:
                     y=True
-            for j,g,h in j:
-                if j==User or g==User or h==User:
-                    x=True
-                if j==Password or g==Password or h==Password:
-                    y=True
+                if x==True and y==True:
+                    print('Successfully loaded points (you have %d points)'%z[i]['Points'])
+                    break
             if x==True and y==True:
-                print('Successfully loaded points (you have %d points)'%i)
+                break
             else:
                 print('Login unsuccessfull')
 def Register():
