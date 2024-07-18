@@ -3,6 +3,8 @@ import random
 def login():
     x=False
     y=False
+    global User
+    global Password
     User=input('Enter Your user')
     Password=input('Enter Your Passwer')
     with open('Data_Base.dat','rb') as f:
@@ -16,8 +18,10 @@ def login():
                 if x==True and y==True:
                     print('Successfully loaded points (you have %d points)'%z[i]['Points'])
                     z[i]['Hints']=3
+                    global H
                     H=3
-                    Point=z[i]['Points']
+                    global point
+                    point=z[i]['Points']
                     break
             if x==True and y==True:
                 break
@@ -31,11 +35,11 @@ def Register():
     d['User']=User.strip()
     d['Password']=Password.strip()
     with open('Data_Base.dat','rb') as f:
-        x=pickle.load(f)
+        x=pik.load(f)
         y['U1']=d
         y['U2']=x
     with open('Data_Base.dat','wb') as f:
-        pickle.dump(y,f)
+        pik.dump(y,f)
     print('File Uploaded, Proceed to Login')
 while True:
     opt1=input('Register or Login')
@@ -53,22 +57,22 @@ if opt3==a:
 if opt3!=a:
     if opt3 in range(a-5,a+5):
         print('You got 50 points')
-        point=points+50
+        point=point+50
     elif opt3 in range(a-10,a+10):
         print('You got 25 points')
-        point=points+25
+        point=point+25
     elif opt3 in range(a-15,a+15):
         print('You got no points')
     elif opt3 in range(a-20,a+20):
         print('You got -25 points')
-        point=points-25
+        point=point-25
     elif opt3 in range(a-25,a+25):
         print('You got -50 points')
-        point=points-50
+        point=point-50
     else:
         print('Too far from the number, consider hint')
     opt2=input('Shop or use hint?')
-    if opt2.lower=='Y':
+    if opt2.lower()=='y':
         if H>0:
             H=H-1
             x=a+90
@@ -82,29 +86,68 @@ if opt3!=a:
             print('You got +1 hint for 100 points')
             H=H+1
             point=point-50
-        else:
+        elif point<100:
             print('You have not enough points')
     else:
         print('Ok')
     cntr=1
-    for i in range(1,4):
+    for i in range(1,5):
         cntr=cntr+1
         opt3=int(input('Try again'))
-        if opt3 in range(a-5,a+5):
-            print('You got 50 points')
-            point=points+50
-        elif opt3 in range(a-10,a+10):
-            print('You got 25 points')
-            point=points+25
-        elif opt3 in range(a-15,a+15):
-            print('You got no points')
-        elif opt3 in range(a-20,a+20):
-            print('You got -25 points')
-            point=points-25
-        elif opt3 in range(a-25,a+25):
-            print('You got -50 points')
-            point=points-50
-        else:
-            print('Too far from the number, consider hint')
-        if opt3==a:
+        if opt3 !=a:
+            if opt3 in range(a-5,a+5):
+                print('You got 50 points')
+                point=point+50
+            elif opt3 in range(a-10,a+10):
+                print('You got 25 points')
+                point=point+25
+            elif opt3 in range(a-15,a+15):
+                print('You got no points')
+            elif opt3 in range(a-20,a+20):
+                print('You got -25 points')
+                point=point-25
+            elif opt3 in range(a-25,a+25):
+                print('You got -50 points')
+                point=point-50
+            else:
+                print('Too far from the number, consider hint')
+            opt2=input('Shop or use hint?')
+            if opt2.lower()=='y':
+                if H>0:
+                    H=H-1
+                    x=a+50
+                    y=a-50
+                    if x>100:
+                        x=100
+                    if y<0:
+                        y=0
+                    print('Hint: Number lies b/w %d to %d'%x,y)
+                elif points>100:
+                    print('You got +1 hint for 100 points')
+                    H=H+1
+                    point=point-50
+                elif point<100:
+                    print('You have not enough points')
+            else:
+                print('Ok')
+        elif opt3==a:
             print('Good you guessed the right number in %d try'%cntr)
+            break
+if opt3!=a:
+    print('Out of tries')
+with open('Data_Base.dat','rb') as f:
+        z=pik.load(f)
+        for i in z:
+            for j in z[i]:
+                if z[i][j]==User:
+                    x=True
+                if z[i][j]==Password:
+                    y=True
+                if x==True and y==True:
+                    print('Successfully loaded points (you have %d points)'%z[i]['Points'])
+                    z[i]['Hints']=3
+                    global H
+                    H=3
+                    global point
+                    point=z[i]['Points']
+                    break
