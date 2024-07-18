@@ -75,32 +75,36 @@ if opt3!=a:
         print('Too far from the number, consider hint')
     opt2=input('Shop or use hint?')
     if opt2.lower()=='y':
-        if H>0:
-            if H>=4:
-                H=H-4
-                b=4
-                x=a+b
-                y=a-b
-                if x>100:
-                    x=100
-                if y<0:
-                    y=0
-                print('The number lies b/w %d and %d '%(y,x))
-            H=H-1
-            b=random.randrange(0,50)
-            x=a+b
-            y=a-b
-            if x>100:
-                x=100
-            if y<0:
-                y=0
-            print('Hint: Number lies b/w ',y, '  to ',x)
-        elif point>100:
-            print('You got +1 hint for 100 points')
-            H=H+1
-            point=point-50
-        elif point<100:
-            print('You have not enough points')
+        opt4=input('S(shop) or H(hint)')
+        if opt4.lower()=='s':
+            if H>0:
+                if H>=4:
+                    H=H-4
+                    b=4
+                    x=a+b
+                    y=a-b
+                    if x>100:
+                        x=100
+                    if y<0:
+                        y=0
+                    print('The number lies b/w %d and %d '%(y,x))
+                elif H<4:
+                    H=H-1
+                    b=random.randrange(0,50)
+                    x=a+b
+                    y=a-b
+                    if x>100:
+                        x=100
+                    if y<0:
+                        y=0
+                    print('Hint: Number lies b/w ',y, '  to ',x)
+        if opt4.lower()=='h':
+            if point>100:
+                print('You got +1 hint for 100 points')
+                H=H+1
+                point=point-50
+            elif point<100:
+                print('You have not enough points')
     else:
         print('Ok')
     cntr=1
@@ -126,24 +130,38 @@ if opt3!=a:
                 print('Too far from the number, consider hint')
             opt2=input('Shop or use hint?')
             if opt2.lower()=='y':
-                if H>0:
-                    H=H-1
-                    b=random.randrange(0,50)
-                    x=a+b
-                    y=a-b
-                    if x>100:
-                        x=100
-                    if y<0:
-                        y=0
-                    print('Hint: Number lies b/w ',y, '  to ',x)
-                elif points>100:
-                    print('You got +1 hint for 100 points')
-                    H=H+1
-                    point=point-50
-                elif point<100:
-                    print('You have not enough points')
-            else:
-                print('Ok')
+                opt4=input('S(shop) or H(hint)')
+                if opt4.lower()=='s':
+                    if H>0:
+                        if H>=4:
+                            H=H-4
+                            b=4
+                            x=a+b
+                            y=a-b
+                            if x>100:
+                                x=100
+                            if y<0:
+                                y=0
+                            print('The number lies b/w %d and %d '%(y,x))
+                        elif H<4:
+                            H=H-1
+                            b=random.randrange(0,50)
+                            x=a+b
+                            y=a-b
+                            if x>100:
+                                x=100
+                            if y<0:
+                                y=0
+                            print('Hint: Number lies b/w ',y, '  to ',x)
+               if opt4.lower()=='h':
+                   if point>100:
+                       print('You got +1 hint for 100 points')
+                       H=H+1
+                       point=point-50
+                   elif point<100:
+                       print('You have not enough points')
+           else:
+               print('Ok')
         elif opt3==a:
             print('Good you guessed the right number in %d try'%cntr)
             point=point+200
