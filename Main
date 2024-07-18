@@ -50,17 +50,19 @@ while True:
     elif opt1.lower()=='login':
         login()
         break
-print('Choose a number between 0-100 (in 5 tries)')
+print('Choose a number between 0-100 (in 10 tries)')
 opt3=int(input('Enter your guess'))
 a=random.randrange(0,100)
 if opt3==a:
-    print('Amazing you guessed the right number in first try')
+    print('Amazing you guessed the right number in first try \n You have gained +500 Points and +3 Hints')
+    point=point+500
+    H=H+3
 if opt3!=a:
     if opt3 in range(a-5,a+5):
-        print('You got 50 points')
+        print('You got 50 points \n Number is between %d ,-5 to +5'%a)
         point=point+50
     elif opt3 in range(a-10,a+10):
-        print('You got 25 points')
+        print('You got 25 points \n Number is between %d ,-10 to +10'%a)
         point=point+25
     elif opt3 in range(a-15,a+15):
         print('You got no points')
@@ -76,14 +78,15 @@ if opt3!=a:
     if opt2.lower()=='y':
         if H>0:
             H=H-1
-            x=a+90
-            y=a-90
+            b=random.randrange(0,50)
+            x=a+b
+            y=a-b
             if x>100:
                 x=100
             if y<0:
                 y=0
-            print('Hint: Number lies b/w %d to %d'%x,y)
-        elif points>100:
+            print('Hint: Number lies b/w ',y, '  to ',x)
+        elif point>100:
             print('You got +1 hint for 100 points')
             H=H+1
             point=point-50
@@ -92,15 +95,15 @@ if opt3!=a:
     else:
         print('Ok')
     cntr=1
-    for i in range(1,5):
+    for i in range(1,10):
         cntr=cntr+1
         opt3=int(input('Try again'))
         if opt3 !=a:
             if opt3 in range(a-5,a+5):
-                print('You got 50 points')
+                print('You got 50 points \n Number is between %d ,-5 to  +5'%a)
                 point=point+50
             elif opt3 in range(a-10,a+10):
-                print('You got 25 points')
+                print('You got 25 points \n Number is between %d ,-10 to +10'%a)
                 point=point+25
             elif opt3 in range(a-15,a+15):
                 print('You got no points')
@@ -116,13 +119,14 @@ if opt3!=a:
             if opt2.lower()=='y':
                 if H>0:
                     H=H-1
-                    x=a+50
-                    y=a-50
+                    b=random.randrange(0,50)
+                    x=a+b
+                    y=a-b
                     if x>100:
                         x=100
                     if y<0:
                         y=0
-                    print('Hint: Number lies b/w %d to %d'%x,y)
+                    print('Hint: Number lies b/w ',y, '  to ',x)
                 elif points>100:
                     print('You got +1 hint for 100 points')
                     H=H+1
@@ -133,22 +137,13 @@ if opt3!=a:
                 print('Ok')
         elif opt3==a:
             print('Good you guessed the right number in %d try'%cntr)
+            point=point+200
             break
 if opt3!=a:
     print('Out of tries')
+print('Your points are %d'%point,'\tAnd your Hints are %d'%H)
 with open('Data_Base.dat','rb') as f:
         z=pik.load(f)
         for i in z:
-            for j in z[i]:
-                if z[i][j]==User:
-                    x=True
-                if z[i][j]==Password:
-                    y=True
-                if x==True and y==True:
-                    print('Successfully loaded points (you have %d points)'%z[i]['Points'])
-                    z[i]['Hints']=3
-                    global H
-                    H=3
-                    global point
-                    point=z[i]['Points']
-                    break
+            z[i]['Points']=point
+            z[i]['Hints']=H
