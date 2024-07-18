@@ -6,7 +6,7 @@ def login():
     global User
     global Password
     User=input('Enter Your user')
-    Password=input('Enter Your Passwer')
+    Password=input('Enter Your Password')
     with open('Data_Base.dat','rb') as f:
         z=pik.load(f)
         for i in z:
@@ -58,10 +58,10 @@ if opt3==a:
     H=H+3
 if opt3!=a:
     if opt3 in range(a-5,a+5):
-        print('You got 50 points \n Number is between %d ,-5 to +5'%a)
+        print('You got 50 points \n Number is between %d ,-5 to +5'%opt3)
         point=point+50
     elif opt3 in range(a-10,a+10):
-        print('You got 25 points \n Number is between %d ,-10 to +10'%a)
+        print('You got 25 points \n Number is between %d ,-10 to +10'%opt3)
         point=point+25
     elif opt3 in range(a-15,a+15):
         print('You got no points')
@@ -109,10 +109,10 @@ if opt3!=a:
         opt3=int(input('Try again'))
         if opt3 !=a:
             if opt3 in range(a-5,a+5):
-                print('You got 50 points \n Number is between %d ,-5 to  +5'%a)
+                print('You got 50 points \n Number is between %d ,-5 to  +5'%opt3)
                 point=point+50
             elif opt3 in range(a-10,a+10):
-                print('You got 25 points \n Number is between %d ,-10 to +10'%a)
+                print('You got 25 points \n Number is between %d ,-10 to +10'%opt3)
                 point=point+25
             elif opt3 in range(a-15,a+15):
                 print('You got no points')
