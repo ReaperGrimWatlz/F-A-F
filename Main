@@ -17,9 +17,8 @@ def login():
                     y=True
                 if x==True and y==True:
                     print('Successfully loaded points (you have %d points)'%z[i]['Points'])
-                    z[i]['Hints']=3
                     global H
-                    H=3
+                    H=z[i]['Hints']
                     global point
                     point=z[i]['Points']
                     break
@@ -77,6 +76,16 @@ if opt3!=a:
     opt2=input('Shop or use hint?')
     if opt2.lower()=='y':
         if H>0:
+            if H>=4:
+                H=H-4
+                b=4
+                x=a+b
+                y=a-b
+                if x>100:
+                    x=100
+                if y<0:
+                    y=0
+                print('The number lies b/w %d and %d '%(y,x))
             H=H-1
             b=random.randrange(0,50)
             x=a+b
