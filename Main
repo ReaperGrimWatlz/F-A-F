@@ -34,13 +34,14 @@ def Register():
     d={'Points':500}
     d['User']=User.strip()
     d['Password']=Password.strip()
+    d['Hints']=3
     with open('Data_Base.dat','rb') as f:
         x=pik.load(f)
         y['U1']=d
         y['U2']=x
     with open('Data_Base.dat','wb') as f:
         pik.dump(y,f)
-    print('File Uploaded, Proceed to Login')
+    print('Data Uploaded, Proceed to Login')
 while True:
     opt1=input('Register or Login')
     opt1=opt1.strip()
