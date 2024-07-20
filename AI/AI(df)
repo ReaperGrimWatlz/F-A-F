@@ -1,0 +1,3 @@
+import pandas as pf
+dfx=pf.DataFrame([[10927986,189,7916],[12691836,208,8508],[4631392,149,7226],[4328063,157,7617]],index=['delhi','mumbai','kolkata','chennai'],columns=['Population','Hospitals','Schools'])
+print(dfx)
