@@ -8,7 +8,9 @@ print(xxdf)
 xdf=pd.DataFrame(data)
 xdf=xdf.assign(Address=['Delhi','Noida','New Delhi',"Mumbai",'Banglore'])
 print(xdf)
+#dropping row
 xfdf=pd.DataFrame(data)
 print(xfdf)
 xfdf=xfdf.drop([1,2])
 print(xfdf)
+#dropping column
