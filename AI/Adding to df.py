@@ -6,4 +6,7 @@ df=df.append(nr)
 print(df)
 #or
 import pandas as pd
-xdf=1
+xdf1=pd.DataFrame({'Name':['John','Jane'],'Age':[25,20]})
+xdf2=pd.DataFrame({'Name':['Peter','Paul'],'Age':[35,30]})
+xdf3=pd.DataFrame({'Name':['Tony','Pepper'],'Age':[25,20]})
+xdf=pd.concat
