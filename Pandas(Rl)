@@ -1,0 +1,7 @@
+import pandas as pd
+sl=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+ser=pd.series(sl)
+print(ser)
+sl=['ABC,'EXG','TWa','WRT']
+ser1=pd.series(sl1,index=['X','Y,'Z','Undefined'])
+print(ser1)
