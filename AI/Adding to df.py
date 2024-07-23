@@ -2,7 +2,7 @@ import pandas as pd
 df=pd.DataFrame({'A':[1,2,3],'B':[4,5,6]})
 print(df)
 nr={'A':7,'B':8}
-df=df.append(nr)
+df=df._append(nr,ignore_index=True)
 print(df)
 #or
 import pandas as pd
