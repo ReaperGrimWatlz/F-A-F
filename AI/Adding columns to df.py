@@ -25,5 +25,5 @@ print(xsdf)
 xssf=xxdf.filter(like='Pe')
 print(xssf)
 #sorting
-sdf=xxdf.sort_values(['Marks','Percentage'],ascending=False, na_postion='First')
+sdf=xxdf.sort_values(['Marks','Percentage'],ascending=False)
 print(sdf)
