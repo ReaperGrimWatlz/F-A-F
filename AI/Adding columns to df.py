@@ -16,3 +16,4 @@ print(xfdf)
 #dropping column
 xsds=pd.DataFrame(data)
 xsds=xsds.drop(['Name',axis=1)
+print(xsds)
