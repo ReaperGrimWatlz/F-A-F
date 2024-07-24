@@ -27,3 +27,14 @@ print(xssf)
 #sorting
 sdf=xxdf.sort_values('marks',ascending=False)
 print(sdf)
+import pandas as pd
+import csv # type: ignore
+data={'R.No.':[1,2,3,4,5],'Name':['A','B','C','D','E'],'marks':[99,80,89,90,91]}
+xxdf=pd.DataFrame(data)
+print(xxdf)
+xxdf['Percentage']=(xxdf['marks']/100)*100
+xxdf['%']='%'
+xxdf=xxdf.assign(Address=['Delhi','Noida','New Delhi',"Mumbai",'Banglore'])
+xxdf=xxdf.sort_values('marks',ascending=False)
+print(xxdf)
+xxdf.to_csv('XYZ.csv',mode='w',index=False,header=True)
