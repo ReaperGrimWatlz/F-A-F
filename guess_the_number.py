@@ -1,0 +1,177 @@
+import pickle as pik # type: ignore
+import random # type: ignore
+def login():
+    x=False
+    y=False
+    global User
+    global Password
+    User=input('Enter Your user')
+    Password=input('Enter Your Password')
+    with open('Data_Base.dat','rb') as f:
+        z=pik.load(f)
+        for i in z:
+            for j in z[i]:
+                if z[i][j]==User:
+                    x=True
+                if z[i][j]==Password:
+                    y=True
+                if x==True and y==True:
+                    print('Successfully loaded points (you have %d points)'%z[i]['Points'])
+                    global H
+                    H=z[i]['Hints']
+                    global point
+                    point=z[i]['Points']
+                    break
+            if x==True and y==True:
+                break
+            else:
+                print('Login unsuccessfull')
+def Register():
+    y={}
+    User=input('Enter Your user')
+    Password=input('Enter Your Passwer')
+    d={'Points':500}
+    d['User']=User.strip()
+    d['Password']=Password.strip()
+    d['Hints']=3
+    with open('Data_Base.dat','rb') as f:
+        x=pik.load(f)
+        y['U1']=d
+        y['U2']=x
+    with open('Data_Base.dat','wb') as f:
+        pik.dump(y,f)
+    print('Data Uploaded, Proceed to Login')
+while True:
+    opt1=input('Register or Login')
+    opt1=opt1.strip()
+    if opt1.lower()=='register':
+        Register()
+    elif opt1.lower()=='login':
+        login()
+        break
+print('Choose a number between 0-100 (in 10 tries)')
+opt3=int(input('Enter your guess'))
+a=random.randrange(0,100)
+if opt3==a:
+    print('Amazing you guessed the right number in first try \n You have gained +500 Points and +3 Hints')
+    point=point+500
+    H=H+3
+if opt3!=a:
+    if opt3 in range(a-5,a+5):
+        print('You got 50 points \n Number is between %d ,-5 to +5'%opt3)
+        point=point+50
+    elif opt3 in range(a-10,a+10):
+        print('You got 25 points \n Number is between %d ,-10 to +10'%opt3)
+        point=point+25
+    elif opt3 in range(a-15,a+15):
+        print('You got no points')
+    elif opt3 in range(a-20,a+20):
+        print('You got -25 points')
+        point=point-25
+    elif opt3 in range(a-25,a+25):
+        print('You got -50 points')
+        point=point-50
+    else:
+        print('Too far from the number, consider hint')
+    opt2=input('Shop or use hint?')
+    if opt2.lower()=='y':
+        opt4=input('S(shop) or H(hint)')
+        if opt4.lower()=='s':
+            if H>0:
+                if H>=4:
+                    H=H-4
+                    b=4
+                    x=a+b
+                    y=a-b
+                    if x>100:
+                        x=100
+                    if y<0:
+                        y=0
+                    print('The number lies b/w %d and %d '%(y,x))
+                elif H<4:
+                    H=H-1
+                    b=random.randrange(0,50)
+                    x=a+b
+                    y=a-b
+                    if x>100:
+                        x=100
+                    if y<0:
+                        y=0
+                    print('Hint: Number lies b/w ',y, '  to ',x)
+        if opt4.lower()=='h':
+            if point>100:
+                print('You got +1 hint for 100 points')
+                H=H+1
+                point=point-50
+            elif point<100:
+                print('You have not enough points')
+    else:
+        print('Ok')
+    cntr=1
+    for i in range(1,10):
+        cntr=cntr+1
+        opt3=int(input('Try again'))
+        if opt3 !=a:
+            if opt3 in range(a-5,a+5):
+                print('You got 50 points \n Number is between %d ,-5 to  +5'%opt3)
+                point=point+50
+            elif opt3 in range(a-10,a+10):
+                print('You got 25 points \n Number is between %d ,-10 to +10'%opt3)
+                point=point+25
+            elif opt3 in range(a-15,a+15):
+                print('You got no points')
+            elif opt3 in range(a-20,a+20):
+                print('You got -25 points')
+                point=point-25
+            elif opt3 in range(a-25,a+25):
+                print('You got -50 points')
+                point=point-50
+            else:
+                print('Too far from the number, consider hint')
+            opt2=input('Shop or use hint?')
+            if opt2.lower()=='y':
+                opt4=input('S(shop) or H(hint)')
+                if opt4.lower()=='s':
+                    if H>0:
+                        if H>=4:
+                            H=H-4
+                            b=4
+                            x=a+b
+                            y=a-b
+                            if x>100:
+                                x=100
+                            if y<0:
+                                y=0
+                            print('The number lies b/w %d and %d '%(y,x))
+                        elif H<4:
+                            H=H-1
+                            b=random.randrange(0,50)
+                            x=a+b
+                            y=a-b
+                            if x>100:
+                                x=100
+                            if y<0:
+                                y=0
+                            print('Hint: Number lies b/w ',y, '  to ',x)
+                if opt4.lower()=='h':
+                    if point>100:
+                       print('You got +1 hint for 100 points')
+                       H=H+1
+                       point=point-50
+                    elif point<100:
+                       print('You have not enough points')
+            else:
+               print('Ok')
+        elif opt3==a:
+            print('Good you guessed the right number in %d try'%cntr)
+            point=point+200
+            H=H+2
+            break
+if opt3!=a:
+    print('Out of tries')
+print('Your points are %d'%point,'\tAnd your Hints are %d'%H)
+with open('Data_Base.dat','rb') as f:
+        z=pik.load(f)
+        for i in z:
+            z[i]['Points']=point
+            z[i]['Hints']=H
